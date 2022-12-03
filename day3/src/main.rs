@@ -23,12 +23,10 @@ fn priority(item: char) -> i32 {
     let p = item as i32;
     if p>=97 && p<=122 {
         return p-96;
-
     }
     if p>=65 && p<=90 {
         return p-38;
     }
-
     0
 }
 
@@ -51,23 +49,3 @@ fn read_file_to_vector(file_path: &Path, vector: &mut Vec<String>) {
         }
     }
 }
-
-/*
-fn read_file_to_vector(file_path: &Path, vector: &mut Vec<String>) {
-    if let Ok(lines) = read_lines(file_path) {
-        for line in lines {
-            if let Ok(ip) = line {
-                vector.push(ip);
-            }
-        }
-    }
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
-}
-*/
