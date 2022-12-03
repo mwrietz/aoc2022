@@ -7,16 +7,34 @@ fn main() {
     let mut rucksacks = Vec::new();
     read_file_to_vector(&path, &mut rucksacks);
 
+    // part 1
     let mut priority_sum = 0;
     for rs in &rucksacks {
         let rs_items: Vec<char> = rs.chars().collect();
         let n = rs_items.len();
-        let rs_compartments: Vec<&[char]> =rs_items.chunks(n/2).collect();
+        let rs_compartments: Vec<&[char]> = rs_items.chunks(n/2).collect();
 
         priority_sum += priority(duplicate_item(rs_compartments[0], rs_compartments[1]))
     }
     println!("part 1");
     println!("priority_sum: {}", priority_sum);
+
+    // part 2
+    let groups: Vec<&[String]> = rucksacks.chunks(3).collect();
+
+    let mut group_sum = 0;
+    for group in groups {
+        let first_string = &group[0];
+        let first_chars: Vec<char> = first_string.chars().collect();
+        for c in first_chars {
+            if group[1].contains(c) && group[2].contains(c) {
+                group_sum += priority(c);
+                break;
+            };
+        }
+    }
+    println!("part 2");
+    println!("priority_sum: {}", group_sum);
 }
 
 fn priority(item: char) -> i32 {
