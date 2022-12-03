@@ -22,7 +22,7 @@ fn main() {
         let n = rs_items.len();
         let rs_compartments: Vec<&[char]> = rs_items.chunks(n/2).collect();
 
-        priority_sum += priority(duplicate_item(rs_compartments[0], rs_compartments[1]))
+        priority_sum += priority(get_duplicate_item(rs_compartments[0], rs_compartments[1]))
     }
     println!("part 1");
     println!("priority_sum: {}", priority_sum);
@@ -59,7 +59,7 @@ fn priority(item: char) -> i32 {
     0
 }
 
-fn duplicate_item(a1: &[char], a2: &[char]) -> char {
+fn get_duplicate_item(a1: &[char], a2: &[char]) -> char {
     for c in a1 {
         if a2.contains(c) {
             return *c;
