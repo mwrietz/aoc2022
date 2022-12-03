@@ -1,11 +1,18 @@
+/*
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
+*/
 
 fn main() {
+    /*
     let path = Path::new("input.txt"); 
     let mut lines = Vec::new();
     read_file_to_vector(&path, &mut lines);
+    */
+    let lines: Vec<&str> = include_str!("input.txt")
+        .lines()
+        .collect();
 
     let mut elf_sum: i32 = 0;
     let mut elf_cals: Vec<i32> = Vec::new();
@@ -31,6 +38,7 @@ fn main() {
     println!("max top three: {}", max_cal_top_three);
 }
 
+/*
 fn read_file_to_vector(file_path: &Path, vector: &mut Vec<String>) {
     if let Ok(lines) = read_lines(file_path) {
         for line in lines {
@@ -48,3 +56,4 @@ where
     let file = File::open(filename)?;
     Ok(io::BufReader::new(file).lines())
 }
+*/
