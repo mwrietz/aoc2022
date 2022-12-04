@@ -1,15 +1,4 @@
-/*
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
-*/
-
 fn main() {
-    /*
-    let path = Path::new("input.txt"); 
-    let mut rucksacks = Vec::new();
-    read_file_to_vector(&path, &mut rucksacks);
-    */
 
     // part 1
     let rucksacks: Vec<&str> = include_str!("input.txt")
@@ -31,6 +20,7 @@ fn main() {
     let rucksacks: Vec<&str> = include_str!("input.txt")
         .lines()
         .collect();
+
     let groups: Vec<&[&str]> = rucksacks.chunks(3).collect();
 
     let mut group_sum = 0;
@@ -67,16 +57,3 @@ fn get_duplicate_item(a1: &[char], a2: &[char]) -> char {
     }
     '_'
 }
-
-/*
-fn read_file_to_vector(file_path: &Path, vector: &mut Vec<String>) {
-    let file = File::open(file_path).expect("cannot open filepath");
-    let lines = io::BufReader::new(file).lines();
-
-    for line in lines {
-        if let Ok(ip) = line {
-            vector.push(ip);
-        }
-    }
-}
-*/
