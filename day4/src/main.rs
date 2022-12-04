@@ -1,7 +1,7 @@
 fn main() {
     let lines: Vec<&str> = include_str!("./input.txt").lines().collect();
 
-    // part 1
+    // parts 1 & 2
     let mut n_fully_contained = 0;
     let mut n_overlaps = 0;
     for line in lines {
@@ -15,8 +15,6 @@ fn main() {
     }
     println!("fully contained: {}", n_fully_contained);
     println!("overlaps: {}", n_overlaps);
-
-    // part 2
 }
 
 fn overlaps(a: &Vec<&str>) -> bool {
