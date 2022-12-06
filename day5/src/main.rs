@@ -16,7 +16,7 @@ fn main() {
     stack_lines.reverse();
 
     // determine number of stacks
-    let n_stacks = (stack_lines[0].len() + 1)/4;
+    let n_stacks = (stack_lines[0].len() + 1) / 4;
     println!("number of stacks: {}", n_stacks);
 
     for part in 1..=2 {
@@ -25,14 +25,14 @@ fn main() {
         for i in 0..n_stacks {
             let mut v: Vec<char> = Vec::new();
             for stack_line in &stack_lines {
-                let c = stack_line.chars().nth(i*4+1).unwrap().clone();
+                let c = stack_line.chars().nth(i * 4 + 1).unwrap().clone();
                 if c != ' ' {
                     v.push(c);
                 }
             }
             stacks.push(v.clone());
         }
-        
+
         println!("original stacks:");
         for i in 0..n_stacks {
             println!("{:?}", stacks[i]);
@@ -73,8 +73,8 @@ fn main() {
 fn get_instructions(inst: &str) -> (i32, usize, usize) {
     let split: Vec<&str> = inst.split(" ").collect();
     let qty: i32 = split[1].parse::<i32>().unwrap();
-    let from: usize = split[3].parse::<usize>().unwrap()-1;
-    let to: usize = split[5].parse::<usize>().unwrap()-1;
+    let from: usize = split[3].parse::<usize>().unwrap() - 1;
+    let to: usize = split[5].parse::<usize>().unwrap() - 1;
 
     (qty, from, to)
 }
