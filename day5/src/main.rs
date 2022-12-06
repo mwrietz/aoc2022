@@ -19,6 +19,7 @@ fn main() {
     let n_stacks = (stack_lines[0].len() + 1)/4;
     println!("number of stacks: {}", n_stacks);
 
+    // start part 1
     // put stack_lines into vectors
     let mut stacks: Vec<Vec<char>> = Vec::new();
     for i in 0..n_stacks {
@@ -38,7 +39,7 @@ fn main() {
     }
 
     // reorder stacks
-    for instruction in instructions {
+    for instruction in &instructions {
         let (qty, from, to) = get_instructions(instruction);
         for _i in 0..qty {
             let c: char = stacks[from].pop().unwrap();
@@ -52,8 +53,48 @@ fn main() {
         println!("{:?}", stacks[i]);
         msg.push(stacks[i].pop().unwrap());
     }
-    println!("msg: {}", msg);
+    println!("part 1 msg: {}", msg);
 
+    // start part 2
+    // put stack_lines into vectors
+    let mut stacks: Vec<Vec<char>> = Vec::new();
+    for i in 0..n_stacks {
+        let mut v: Vec<char> = Vec::new();
+        for stack_line in &stack_lines {
+            let c = stack_line.chars().nth(i*4+1).unwrap().clone();
+            if c != ' ' {
+                v.push(c);
+            }
+        }
+        stacks.push(v.clone());
+    }
+    
+    println!("original stacks:");
+    for i in 0..n_stacks {
+        println!("{:?}", stacks[i]);
+    }
+
+    // reorder stacks
+    for instruction in &instructions {
+        let (qty, from, to) = get_instructions(instruction);
+        let mut temp: Vec<char> = Vec::new();
+        for _i in 0..qty {
+            let c: char = stacks[from].pop().unwrap();
+            temp.push(c);
+        }
+        for _i in 0..qty {
+            let c: char = temp.pop().unwrap();
+            stacks[to].push(c);
+        }
+    }
+
+    println!("updated stacks:");
+    let mut msg = String::from("");
+    for i in 0..n_stacks {
+        println!("{:?}", stacks[i]);
+        msg.push(stacks[i].pop().unwrap());
+    }
+    println!("part 2 msg: {}", msg);
 }
 
 fn get_instructions(inst: &str) -> (i32, usize, usize) {
