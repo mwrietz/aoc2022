@@ -1,6 +1,6 @@
 struct Position {
     row: usize,
-    col: usize 
+    col: usize,
 }
 
 fn main() {
@@ -19,7 +19,6 @@ fn main() {
     print_vectors(&visible);
 
     println!("visible: {}", count_visible(&visible));
-
 }
 
 fn count_visible(v: &Vec<Vec<i32>>) -> i32 {
@@ -33,10 +32,7 @@ fn count_visible(v: &Vec<Vec<i32>>) -> i32 {
 }
 
 fn update_interior_visiblity(t: &Vec<Vec<i32>>, v: &mut Vec<Vec<i32>>) {
-    let mut pos = Position {
-        row: 0,
-        col: 0,
-    };
+    let mut pos = Position { row: 0, col: 0 };
     let w = t[0].len();
     let h = t.len();
 
@@ -139,9 +135,8 @@ fn set_perimeter_visibility(v: &mut Vec<Vec<i32>>) {
         for j in 0..w {
             if i == 0 || i == (h - 1) {
                 v[i][j] = 1;
-            }
-            else {
-                if j == 0 || j == (h-1) {
+            } else {
+                if j == 0 || j == (h - 1) {
                     v[i][j] = 1;
                 }
             }
