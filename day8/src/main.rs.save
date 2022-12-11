@@ -21,6 +21,16 @@ fn main() {
     println!("visible: {}", count_visible(&visible));
 }
 
+fn count_visible(v: &Vec<Vec<i32>>) -> i32 {
+    let mut count = 0;
+
+    for i in 0..v.len() {
+        count += v[i].iter().sum::<i32>();
+    }
+
+    count
+}
+
 fn update_interior_visiblity(t: &Vec<Vec<i32>>, v: &mut Vec<Vec<i32>>) {
     let mut pos = Position { row: 0, col: 0 };
     let w = t[0].len();
@@ -30,55 +40,74 @@ fn update_interior_visiblity(t: &Vec<Vec<i32>>, v: &mut Vec<Vec<i32>>) {
         for row in 1..(h - 1) {
             pos.row = row;
             pos.col = col;
-
-            if visible(t, &pos) {
+            if visible_left(t, &pos) {
+                v[pos.row][pos.col] = 1;
+            }
+            if visible_right(t, &pos) {
+                v[pos.row][pos.col] = 1;
+            }
+            if visible_top(t, &pos) {
+                v[pos.row][pos.col] = 1;
+            }
+            if visible_bottom(t, &pos) {
                 v[pos.row][pos.col] = 1;
             }
         }
     }
 }
 
-fn visible(t: &Vec<Vec<i32>>, p: &Position) -> bool {
-    let w = t[0].len();
-    let h = t.len();
-    let mut blocked = 0;
-    //top
+fn visible_top(t: &Vec<Vec<i32>>, p: &Position) -> bool {
+    let mut visible = true;
     for row in 0..(p.row) {
         if t[row][p.col] >= t[p.row][p.col] {
-            blocked += 1;
-            break;
-        }
-    }
-    //bottom
-    for row in (p.row + 1)..h {
-        if t[row][p.col] >= t[p.row][p.col] {
-            blocked += 1;
-            break;
-        }
-    }
-    //left
-    for col in 0..(p.col) {
-        if t[p.row][col] >= t[p.row][p.col] {
-            blocked += 1;
-            break;
-        }
-    }
-    //right
-    for col in (p.col + 1)..w {
-        if t[p.row][col] >= t[p.row][p.col] {
-            blocked += 1;
+            visible = false;
             break;
         }
     }
 
-    match blocked {
-        4 => false,
-        _ => true
+    visible
+}
+
+fn visible_bottom(t: &Vec<Vec<i32>>, p: &Position) -> bool {
+    let h = t.len();
+    let mut visible = true;
+    for row in (p.row + 1)..h {
+        if t[row][p.col] >= t[p.row][p.col] {
+            visible = false;
+            break;
+        }
     }
+
+    visible
+}
+
+fn visible_left(t: &Vec<Vec<i32>>, p: &Position) -> bool {
+    let mut visible = true;
+    for col in 0..(p.col) {
+        if t[p.row][col] >= t[p.row][p.col] {
+            visible = false;
+            break;
+        }
+    }
+
+    visible
+}
+
+fn visible_right(t: &Vec<Vec<i32>>, p: &Position) -> bool {
+    let w = t[0].len();
+    let mut visible = true;
+    for col in (p.col + 1)..w {
+        if t[p.row][col] >= t[p.row][p.col] {
+            visible = false;
+            break;
+        }
+    }
+
+    visible
 }
 
 fn parse_input() -> Vec<Vec<i32>> {
-    let lines: Vec<&str> = include_str!("./input_test.txt").lines().collect();
+    let lines: Vec<&str> = include_str!("./input.txt").lines().collect();
 
     let mut values: Vec<Vec<i32>> = Vec::new();
     for line in lines {
@@ -114,14 +143,3 @@ fn set_perimeter_visibility(v: &mut Vec<Vec<i32>>) {
         }
     }
 }
-
-fn count_visible(v: &Vec<Vec<i32>>) -> i32 {
-    let mut count = 0;
-
-    for i in 0..v.len() {
-        count += v[i].iter().sum::<i32>();
-    }
-
-    count
-}
-
