@@ -1,1 +1,0 @@
-/home/marc/Syncthing/active/computer/programming/rust/aoc/aoc2022/day7/target/debug/day7: /home/marc/Syncthing/active/computer/programming/rust/aoc/aoc2022/day7/src/input.txt /home/marc/Syncthing/active/computer/programming/rust/aoc/aoc2022/day7/src/main.rs
